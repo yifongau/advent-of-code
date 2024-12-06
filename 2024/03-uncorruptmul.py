@@ -34,7 +34,7 @@ def fltr_no_illegal_chars(groups, allowed):
     filtered = []
 
     for i in groups:
-        if check_illegal_chars(i,allowed) == 1:
+        if no_illegal_chars(i,allowed) == 1:
             filtered.append(i)
     
     return filtered
@@ -69,13 +69,52 @@ def fltr_string_at_index(groups, string_tuple):
 
     return filtered
 
+
+
 # define filter parameters
+
+def legit_strings():
+    strings = []
+    for char in 'mul(':
+        strings.append(char)
+    
+    substring = []
+    for possibility in range(3):
+        sub2string = []
+        for i in range(possibility+1):
+            sub3string = []
+            for i in range(10):
+                sub3string.append(str(i))
+            sub2string.append(sub3string)
+        substring.append(sub2string)
+    strings.append(substring)
+    
+    for char in ',':
+        strings.append(char)
+
+    substring = []
+    for possibility in range(3):
+        sub2string = []
+        for i in range(possibility+1):
+            sub3string = []
+            for i in range(10):
+                sub3string.append(str(i))
+            sub2string.append(sub3string)
+        substring.append(sub2string)
+    strings.append(substring)
+
+    for char in ')':
+        strings.append(char)
+    
+    return strings
+
+legit_strings = legit_strings()
 
 def allowed_chars():
     allowed = []
     for i in list("mul(,)"):
         allowed.append(i)
-    for i in list(range(10)):
+    for i in range(10):
         allowed.append(str(i))
     return allowed
 
@@ -92,5 +131,5 @@ groups = split_groups(content,"m",")")
 #print(groups)
 #print(fltr_no_illegal_chars(groups,allowed_chars))
 print(fltr_string_at_start(fltr_no_illegal_chars(groups,allowed_chars),start_string))
-
+#print(legit_strings)
 
