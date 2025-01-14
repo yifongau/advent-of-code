@@ -2,26 +2,33 @@ import os
 
 path = "03-input.txt"
 
-def split_groups(string, start, end):
+def split_groups(raw_string, match_string):
     groups = []
     i = 0
-    while i < len(string):
+    while i < len(raw_string):
         candidate = []
-        if string[i] == start:
+        if raw_string[i] == match_string[0]:
             end_reached = 0
-            candidate.append(string[i])
+            candidate.append(raw_string[i])
             i+=1
             while end_reached != 1:
-                if string[i] != end:
-                    candidate.append(string[i])
+                if raw_string[i] != match_string[len(match_string)-1]:
+                    candidate.append(raw_string[i])
                     i+=1
-                elif string[i] == end:
-                    candidate.append(string[i])
+                elif raw_string[i] == match_string[len(match_string)-1]:
+                    candidate.append(raw_string[i])
                     i+=1
                     end_reached = 1
             groups.append(candidate)
         else: i+=1
     return groups
+
+def match_groups(groups, match_string):
+
+    def match_group(group, match_string):
+        for i in range(len(string)):
+            if string
+
 
 def fltr_no_illegal_chars(groups, allowed):
 
@@ -73,10 +80,10 @@ def fltr_string_at_index(groups, string_tuple):
 
 # define filter parameters
 
-def legit_strings():
-    strings = []
+def create_match_string():
+    match_string = []
     for char in 'mul(':
-        strings.append(char)
+        match_string.append(char)
     
     substring = []
     for possibility in range(3):
@@ -87,10 +94,10 @@ def legit_strings():
                 sub3string.append(str(i))
             sub2string.append(sub3string)
         substring.append(sub2string)
-    strings.append(substring)
+    match_string.append(substring)
     
     for char in ',':
-        strings.append(char)
+        match_string.append(char)
 
     substring = []
     for possibility in range(3):
@@ -101,14 +108,14 @@ def legit_strings():
                 sub3string.append(str(i))
             sub2string.append(sub3string)
         substring.append(sub2string)
-    strings.append(substring)
+    match_string.append(substring)
 
     for char in ')':
-        strings.append(char)
+        match_string.append(char)
     
-    return strings
+    return match_string
 
-legit_strings = legit_strings()
+match_string = create_match_string()
 
 def allowed_chars():
     allowed = []
@@ -126,10 +133,9 @@ start_string = "mul("
 with open(path) as f:
     content = f.read()
 
-groups = split_groups(content,"m",")")        
+#groups = split_groups(content,"m",")")        
 
-#print(groups)
-#print(fltr_no_illegal_chars(groups,allowed_chars))
-print(fltr_string_at_start(fltr_no_illegal_chars(groups,allowed_chars),start_string))
+#print(fltr_string_at_start(fltr_no_illegal_chars(groups,allowed_chars),start_string))
 #print(legit_strings)
 
+print(split_groups(content, match_string))
